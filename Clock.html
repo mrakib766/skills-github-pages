@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>12 Hour Digital Clock</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #6025d7;
+            color: rgb(245, 250, 246);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .clock {
+            font-size: 50px;
+            padding: 20px;
+            background-color: #5227de;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(255, 255, 255, 0.2);
+        }
+    </style>
+</head>
+<body>
+    <div id="clock" class="clock"></div>
+
+    <script>
+        function updateClock() {
+            const clock = document.getElementById("clock");
+            const now = new Date();
+            let hours = now.getHours();
+            let minutes = now.getMinutes();
+            let seconds = now.getSeconds();
+            const ampm = hours >= 12 ? 'PM' : 'AM';
+            
+            // Convert to 12-hour format
+            hours = hours % 12;
+            hours = hours ? hours : 12; // the hour '0' should be '12'
+            
+            // Add leading zero for minutes and seconds
+            minutes = minutes < 10 ? '0' + minutes : minutes;
+            seconds = seconds < 10 ? '0' + seconds : seconds;
+            
+            const timeString = `${hours}:${minutes}:${seconds} ${ampm}`;
+            clock.textContent = timeString;
+        }
+
+        // Update clock every second
+        setInterval(updateClock, 1000);
+
+        // Initial clock update
+        updateClock();
+    </script>
+</body>
+</html>
